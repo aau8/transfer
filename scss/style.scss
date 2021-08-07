@@ -1,0 +1,190 @@
+// Шрифты
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=PT+Sans+Narrow:regular,700);
+$fontFamilyMain: "Raleway";
+$fontFamilyHeaders: "Raleway";
+
+$minHover: 0; // если хочешь убрать hover на телефонах, укажи - 768px
+$tr: .2s;
+
+// Переменные цвета
+:root { 
+  --main: #333333; 
+  // --light: #fff;
+  --second: #666666;
+  --accent: #F3CC3F;
+  // --accent-hover: #43d259;
+  // --accent-active: #26af3b;
+  --accent2: #5E5CE7;
+  // --gradient: linear-gradient(85.53deg, #FF1F1F -5.98%, #C71717 100%);
+  --outline: #CCCCCC;
+  // --bgdark: #000000;
+  --bglight: #F5F5F5;
+  --link-hover: #fafafa;
+  --bg-modal: rgba(0,0,0,.1);
+}
+$main: var(--main);
+// $light: var(--light);
+$second: var(--second);
+$accent: var(--accent);
+// $accent-hover: var(--accent-hover);
+// $accent-active: var(--accent-active);
+$accent2: var(--accent2); 
+// $gradient: var(--gradient); 
+$outline: var(--outline);
+// $bgdark: var(--bgdark);
+$bglight: var(--bglight);
+$link-hover: var(--link-hover);
+$bg-modal: var(--bg-modal);
+
+// Обнуление и общие параметры
+@import '_reset';
+
+html {
+  scroll-behavior: smooth; // делает плавные переходы по якорям
+}
+
+body {
+  color: $main;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  &._lock {
+    overflow: hidden;
+  }
+}
+
+// Главная оболочка
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+// Переменные разрешения экрана (адаптив)
+$wwa: 1200;
+$wwa2: 900;
+$wwa3: 670;
+
+// Контейнер и переменные
+$maxWidthContainer: 1160;
+$maxWidthContainerwwa: 840;
+$maxWidthContainerwwa2: 612;
+
+$paddingContainer: 24;
+$paddingContainerwwa2: 16;
+
+.container {
+  max-width: $maxWidthContainer + ($paddingContainer * 2) + px;
+  margin: 0 auto;
+  padding: 0 $paddingContainer + px; 
+
+  @media screen and (max-width: $wwa + px) {
+    max-width: $maxWidthContainerwwa + ($paddingContainer * 2) + px;
+    padding: 0 $paddingContainer + px;
+  }
+
+  @media screen and (max-width: $wwa2 + px) { 
+    max-width: $maxWidthContainerwwa2 + ($paddingContainerwwa2 * 2) + px;
+    padding: 0 $paddingContainerwwa2 + px;
+  }
+}
+
+.header .container {
+  max-width: 1720px;
+  margin: 0 auto;
+  padding: 0 $paddingContainer + px; 
+
+  @media screen and (max-width: $wwa + px) {
+    max-width: $maxWidthContainerwwa + ($paddingContainer * 2) + px;
+    padding: 0 $paddingContainer + px;
+  }
+
+  @media screen and (max-width: $wwa2 + px) { 
+    max-width: $maxWidthContainerwwa2 + ($paddingContainerwwa2 * 2) + px;
+    padding: 0 $paddingContainerwwa2 + px;
+  }
+}
+
+a {
+  color: $main;
+  transition: $tr;
+}
+
+a:hover {
+  color: $accent;
+}
+
+// Общие стили
+section {
+  padding: 150px 0;
+
+  @media screen and (max-width: $wwa + px) { 
+    padding: 100px 0;
+  }
+
+  @media screen and (max-width: $wwa2 + px) { 
+    padding: 60px 0;
+  }
+
+  @media screen and (max-width: $wwa3 + px) { 
+    padding: 40px 0;
+  }
+}
+
+@import 'elements/text/_tags';
+
+
+// Стили для кнопок
+@import 'elements/_button';
+
+// Стили для элементов форм (инпуты, поля сообщений, кнопки и пр.)
+// @import 'elements/form/_general';
+// @import 'elements/form/_input';
+// @import 'elements/form/_textarea';
+// @import 'elements/form/_checkbox-police';
+// @import 'elements/form/_radio';
+
+
+@import 'elements/_modal';
+
+// .starting-image {
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .zoomify {
+//   display: inline-block;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+// .zoomify::after {
+//   content: '';
+//   position: absolute;
+//   z-index: 1;
+//   width: 100%;
+//   height: 100%;
+//   opacity: 0;
+//   background-image: url("https://images.unsplash.com/photo-1528763216729-fb67cba479db?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=728e3916b52b079634aa7c7f82af612d&auto=format&fit=crop&w=6774&q=80%206774w,%20https://images.unsplash.com/photo-1528763216729-fb67cba479db?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=728e3916b52b079634aa7c7f82af612d&auto=format&fit=crop&w=6774&q=80%206774w");
+//   background-size: cover;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   will-change: background-position;
+// }
+
+// .zoomify:hover .starting-image {
+//   opacity: 0;
+//   position: absolute;
+// }
+
+// .zoomify:hover::after {
+//   opacity: 1;
+//   background-size: 250%;
+//   cursor: zoom-in;
+//   background-position: calc(var(--mouse-x) * 1%) calc(var(--mouse-y) * 1%);
+// }
+
+@import 'blocks/header/_header';
+@import 'blocks/main/_main';

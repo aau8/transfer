@@ -1,0 +1,32 @@
+.textarea {
+
+  & textarea {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid $outline;
+    border-radius: 4px;
+    padding: .7em 1em;
+    
+    @media screen and (max-width: $wwa3 + px) {
+      font-size: 14px;
+    }
+  }
+    
+  @media screen and (max-width: $wwa3 + px) {
+    margin: 8px 0;
+  }
+
+  & label {
+    display: inline-block;
+    font-size: 14px;
+    color: $second;
+    margin: 0 0 4px 0;
+    
+    @media screen and (max-width: $wwa3 + px) {
+      font-size: 13px;
+    }
+  }
+}

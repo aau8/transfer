@@ -1,0 +1,107 @@
+.header {
+  background: #fff;
+}
+
+.search-btn {
+
+  & svg path {
+    transition: $tr;
+  }
+
+  &:hover {
+
+    & svg path {
+      fill: $accent;
+    }
+  }
+}
+
+.close__body {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  position: relative;
+
+  & span {
+    position: absolute;
+    top: 50%; 
+    right: 8px;
+    transform: translate(0, -50%);
+    width: 0;
+    height: 2.4px;
+    background: $second;
+    border-radius: 10px;
+    transition: $tr;
+
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    width: 80%;
+    height: 2.4px;
+    background: $second;
+    border-radius: 10px;
+    transition: $tr;
+
+    @media screen and (max-width: $wwa3 + px) {
+      height: 2.4px;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%) rotate(-45deg);
+    width: 80%;
+    height: 2.4px;
+    background: $second;
+    border-radius: 10px;
+    transition: $tr;
+
+    @media screen and (max-width: $wwa3 + px) {
+      height: 2.4px;
+    }
+  }
+
+  &:hover {
+
+    & span {
+      width: 60%;
+      background: $accent;
+    }
+
+    &::before {
+      width: 40%;
+      bottom: 36%;
+      top: auto;
+      left: 0;
+      transform: translate(0) rotate(45deg);
+      background: $accent;
+    }
+
+    &::after {
+      width: 40%;
+      top: 36%;
+      bottom: auto;
+      left: 0;
+      transform: translate(0) rotate(-45deg);
+      background: $accent;
+    }
+  }
+
+  @media screen and (max-width: $wwa3 + px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@import '_header_top';
+@import '_header_bottom';
+@import '_menu';
+@import '_search';

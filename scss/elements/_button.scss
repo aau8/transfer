@@ -1,0 +1,25 @@
+// Стили для кнопок
+.btn {
+  font-size: 16px;
+  font-weight: 700;
+  color: $main;
+  padding: .7em 2em;
+  border-radius: 4px;
+  background: $accent;
+  text-align: center;
+  transition: .2s;
+
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: $minHover) { 
+    &:hover {
+      // background: $accent-hover; 
+    }
+  }
+
+  &:active {
+    // background: $accent-active;
+  }
+}
