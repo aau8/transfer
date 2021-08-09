@@ -1,0 +1,17 @@
+.region__map {
+
+  & svg {
+
+    & .region__map-region {
+      transition: $tr;
+
+      &:hover { 
+        fill: rgba(94, 92, 231, 0.4); 
+      }
+
+      &._selected {
+        fill: rgba(94, 92, 231, 0.8); 
+      }
+    }
+  }
+}

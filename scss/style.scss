@@ -1,41 +1,13 @@
 // Шрифты
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=PT+Sans+Narrow:regular,700);
-$fontFamilyMain: "Raleway";
-$fontFamilyHeaders: "Raleway";
+$ffMain: "Raleway";
+$ffHeader: "PT Sans Narrow";
 
 $minHover: 0; // если хочешь убрать hover на телефонах, укажи - 768px
 $tr: .2s;
 
-// Переменные цвета
-:root { 
-  --main: #333333; 
-  // --light: #fff;
-  --second: #666666;
-  --accent: #F3CC3F;
-  // --accent-hover: #43d259;
-  // --accent-active: #26af3b;
-  --accent2: #5E5CE7;
-  // --gradient: linear-gradient(85.53deg, #FF1F1F -5.98%, #C71717 100%);
-  --outline: #CCCCCC;
-  // --bgdark: #000000;
-  --bglight: #F5F5F5;
-  --link-hover: #fafafa;
-  --bg-modal: rgba(0,0,0,.1);
-}
-$main: var(--main);
-// $light: var(--light);
-$second: var(--second);
-$accent: var(--accent);
-// $accent-hover: var(--accent-hover);
-// $accent-active: var(--accent-active);
-$accent2: var(--accent2); 
-// $gradient: var(--gradient); 
-$outline: var(--outline);
-// $bgdark: var(--bgdark);
-$bglight: var(--bglight);
-$link-hover: var(--link-hover);
-$bg-modal: var(--bg-modal);
+@import 'elements/_colors';
 
 // Обнуление и общие параметры
 @import '_reset';
@@ -118,18 +90,49 @@ a:hover {
 
 // Общие стили
 section {
-  padding: 150px 0;
+  margin: 150px 0; 
 
   @media screen and (max-width: $wwa + px) { 
-    padding: 100px 0;
+    margin: 100px 0;
   }
 
   @media screen and (max-width: $wwa2 + px) { 
-    padding: 60px 0;
+    margin: 60px 0;
   }
 
   @media screen and (max-width: $wwa3 + px) { 
-    padding: 40px 0;
+    margin: 40px 0;
+  }
+}
+
+.tooltip {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 170px;
+  transform: translate(50%,-105%);
+  font-size: 12px;
+  font-weight: 600;
+  color: $main!important;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: $tr;
+}
+
+[data-tooltip] {
+
+  &:hover {
+
+    & .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 
@@ -141,7 +144,7 @@ section {
 
 // Стили для элементов форм (инпуты, поля сообщений, кнопки и пр.)
 // @import 'elements/form/_general';
-// @import 'elements/form/_input';
+@import 'elements/form/_input';
 // @import 'elements/form/_textarea';
 // @import 'elements/form/_checkbox-police';
 // @import 'elements/form/_radio';
@@ -188,3 +191,11 @@ section {
 
 @import 'blocks/header/_header';
 @import 'blocks/main/_main';
+@import 'blocks/advantages/_advantages';
+@import 'blocks/calc/_calc';
+@import 'blocks/region/_region';
+@import 'blocks/brand/_brand';
+@import 'blocks/news/_news';
+@import 'blocks/blog/_post';
+@import 'blocks/clients/_clients';
+@import 'blocks/reviews/_reviews';

@@ -1,0 +1,27 @@
+.advantages {
+
+}
+
+.container {
+
+}
+
+.advantages__body {
+
+}
+
+.advantages-title {
+}
+
+.title-bg {
+
+}
+
+.advantages__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 16px;
+  margin: 24px 0 0 0;
+}
+
+@import '_card';

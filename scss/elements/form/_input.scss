@@ -1,32 +1,131 @@
 .input {
-  margin: 12px 0;
+  // width: 200px;
+  height: 36px;
+  background: #fff;
+  position: relative;
   
-  & input {
-    width: 100%;
-    height: 100%;
-    font-size: 16px;
-    font-weight: 500;
-    border: 1px solid $outline;
-    border-radius: 4px;
-    padding: .7em 1em;
-    
-    @media screen and (max-width: $wwa3 + px) {
-      font-size: 14px;
-    }
-  }
-    
-  @media screen and (max-width: $wwa3 + px) {
-    margin: 8px 0;
+  & label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0,-50%);
+    font-size: 14px;
+    color: #B3B3B3;
+    background: inherit;
+    padding: 2px 4px;
+    pointer-events: none;
+    z-index: 1;
+    transition: .2s;
   }
 
-  & label {
-    display: inline-block;
+  & input {
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     font-size: 14px;
-    color: $second;
-    margin: 0 0 4px 0;
-    
-    @media screen and (max-width: $wwa3 + px) {
-      font-size: 13px;
+    color: var(--main);
+    background: #fff;
+    border: 1px solid var(--outline);
+    border-radius: 6px;
+    padding: 0 33px 0 10px;
+    transition: .2s;
+
+    &:focus {
+      border-color: #737373; 
+
+      & ~ label {
+        top: 0;
+        left: 2px;
+        transform: translate(0, -50%) scale(.8);
+      }
     }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    transform: translate(0,-50%);
+    background-image: url("data:image/svg+xml,%3Csvg width='17' height='16' viewBox='0 0 17 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.00731 9.3712L7.82478 11.1887L11.0618 4.8114' stroke='%237299FD' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='1.23455' y='0.7' width='14.6' height='14.6' rx='7.3' stroke='%237299FD' stroke-width='1.4'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transition: .2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    transform: translate(0,-50%);
+    background-image: url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.04553 9.43629V3.86536H9.70443V9.43629H8.04553ZM8.04553 12.7417V10.8724H9.70443V12.7417H8.04553Z' fill='%23E07474'/%3E%3Crect x='1.575' y='1.00359' width='14.6' height='14.6' rx='7.3' stroke='%23E07474' stroke-width='1.4'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transition: .2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &._valid {
+
+    &::before {
+      opacity: 1;
+    }
+
+    & input {
+      border-color: #7299fd;
+    }
+
+    & label {
+      top: 0;
+      left: 2px;
+      transform: translate(0, -50%) scale(.8);
+    }
+  }
+
+  &._error {
+
+    &::after {
+      opacity: 1;
+    }
+
+    & input {
+      border-color: #E07474;
+    }
+
+    & + label {
+      color: #E07474;
+    }
+  }
+}
+
+.input__error {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%,-100%);
+  background: #fff;
+  border-radius: 6px;
+  padding: 4px 16px;
+  box-shadow: 0 4px 5px rgba(0,0,0,.1);
+  z-index: 1;
+  
+  & span {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1.2;
   }
 }

@@ -1,0 +1,44 @@
+.advantages__card {
+  width: 100%;
+  background: #fff; 
+  border: 1px solid $outline;
+  border-radius: 10px;
+  position: relative;
+}
+
+.advantages__card__header {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 15px;
+  min-height: 60px;
+
+}
+
+.advantages__card-title {
+  max-width: 172px;
+  width: 100%;
+  font-family: $ffMain;
+  font-size: 16px;
+  font-weight: 600;
+  color: $second;
+}
+
+.advantages-text {
+  color: $second;
+  padding: 0 15px 16px 15px;
+}
+
+.advantages-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+
+  & img,
+  & svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

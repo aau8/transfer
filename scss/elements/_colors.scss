@@ -1,0 +1,30 @@
+// Переменные цвета
+:root { 
+  --main: #333333; 
+  // --light: #fff;
+  --second: #666666;
+  --accent: #F3CC3F;
+  --accent-hover: #f6d96f;
+  // --accent-hover: #43d259;
+  // --accent-active: #26af3b;
+  --accent2: #5E5CE7;
+  // --gradient: linear-gradient(85.53deg, #FF1F1F -5.98%, #C71717 100%);
+  --outline: #CCCCCC;
+  // --bgdark: #000000;
+  --bg-light: #FAFAFA;
+  --link-hover: #f5f5f5;
+  --bg-modal: rgba(0,0,0,.1);
+}
+$main: var(--main);
+// $light: var(--light);
+$second: var(--second);
+$accent: var(--accent);
+$accent-hover: var(--accent-hover);
+// $accent-active: var(--accent-active);
+$accent2: var(--accent2); 
+// $gradient: var(--gradient); 
+$outline: var(--outline);
+// $bgdark: var(--bgdark);
+$bg-light: var(--bg-light);
+$link-hover: var(--link-hover);
+$bg-modal: var(--bg-modal);
