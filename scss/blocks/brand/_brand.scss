@@ -5,9 +5,20 @@
 .brand__list {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   column-gap: 15px;
   row-gap: 15px;
+
+  @media screen and (max-width: $wwa + px) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @media screen and (max-width: $wwa2 + px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .brand-item {
@@ -29,9 +40,21 @@
   justify-content: center;
   padding: 20px;
 
+  @media screen and (max-width: $wwa3 + px) {
+    padding: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 10px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 6px;
+  }
+
   & img {
-    width: 60px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 }

@@ -12,6 +12,7 @@
 
   @media screen and (max-width: $wwa3 + px) {
     font-size: 14px;
+    padding: .7em 1em;
   }
 
   @media screen and (min-width: $minHover) { 
@@ -37,4 +38,15 @@
   text-align: center;
   transition: .2s;
 
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 14px;
+    padding: .7em 1em;
+  }
+
+  // @media screen and (min-width: $minHover) { 
+  //   &:hover {
+  //     background: $accent-hover; 
+  //     color: $main;
+  //   }
+  // }
 }

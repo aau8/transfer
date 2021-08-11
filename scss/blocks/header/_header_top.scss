@@ -10,7 +10,7 @@
   justify-content: space-between;
     
   & .header__search-btn {
-    margin: 0 8px 0 auto;
+    margin: 0 8px 0 0;
   }
 
   @media screen and (min-width: $wwa3 + px) {
@@ -33,6 +33,10 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 20px;
   }
 }
 
@@ -82,12 +86,20 @@
   font-weight: 600;
   color: $second;
   margin: 0 0 0 24px;
+
+  @media screen and (max-width: 620px) {
+    display: none;
+  }
 }
 
 .header__phone {
   display: flex;
   align-items: center;
   margin: 0 0 0 24px;
+
+  @media screen and (max-width: 470px) {
+    display: none;
+  }
 }
 
 .header__phone-icon {

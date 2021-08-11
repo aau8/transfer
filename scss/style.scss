@@ -7,6 +7,11 @@ $ffHeader: "PT Sans Narrow";
 $minHover: 0; // если хочешь убрать hover на телефонах, укажи - 768px
 $tr: .2s;
 
+// Переменные разрешения экрана (адаптив)
+$wwa: 1200;
+$wwa2: 900;
+$wwa3: 670;
+
 @import 'elements/_colors';
 
 // Обнуление и общие параметры
@@ -24,6 +29,10 @@ body {
   &._lock {
     overflow: hidden;
   }
+
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 14px; 
+  }
 }
 
 // Главная оболочка
@@ -33,11 +42,6 @@ body {
   overflow: hidden;
   position: relative;
 }
-
-// Переменные разрешения экрана (адаптив)
-$wwa: 1200;
-$wwa2: 900;
-$wwa3: 670;
 
 // Контейнер и переменные
 $maxWidthContainer: 1160;
@@ -97,11 +101,11 @@ section {
   }
 
   @media screen and (max-width: $wwa2 + px) { 
-    margin: 60px 0;
+    margin: 80px 0;
   }
 
   @media screen and (max-width: $wwa3 + px) { 
-    margin: 40px 0;
+    margin: 60px 0;
   }
 }
 
@@ -111,9 +115,9 @@ section {
   background: #fff;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
   width: 170px;
-  transform: translate(50%,-105%);
+  transform: translate(-50%,-105%);
   font-size: 12px;
   font-weight: 600;
   color: $main!important;
@@ -123,6 +127,7 @@ section {
   visibility: hidden;
   opacity: 0;
   transition: $tr;
+  pointer-events: none;
 }
 
 [data-tooltip] {
@@ -145,12 +150,15 @@ section {
 // Стили для элементов форм (инпуты, поля сообщений, кнопки и пр.)
 // @import 'elements/form/_general';
 @import 'elements/form/_input';
-// @import 'elements/form/_textarea';
+@import 'elements/form/_textarea';
+@import 'elements/form/_checkbox';
+@import 'elements/form/_select';
+@import 'elements/form/_select-more';
 // @import 'elements/form/_checkbox-police';
 // @import 'elements/form/_radio';
 
 
-@import 'elements/_modal';
+// @import 'elements/_modal';
 
 // .starting-image {
 //   width: 100%;
@@ -199,3 +207,6 @@ section {
 @import 'blocks/blog/_post';
 @import 'blocks/clients/_clients';
 @import 'blocks/reviews/_reviews';
+@import 'blocks/faq/_faq';
+@import 'blocks/support/_support';
+@import 'blocks/footer/_footer';

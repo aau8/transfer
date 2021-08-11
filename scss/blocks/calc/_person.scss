@@ -1,0 +1,28 @@
+.calc__person {
+  display: grid;
+  row-gap: 16px;
+}
+
+.calc__person__contacts__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 12px;
+}
+
+.calc__person__contacts-textarea {
+  margin: 12px 0 0 0;
+
+  & .input { 
+    height: 72px;
+
+    & textarea {
+      max-height: 72px;
+      min-height: 72px;
+      padding: 10px;
+    }
+
+    & label {
+      top: 18px;
+    }
+  }
+}

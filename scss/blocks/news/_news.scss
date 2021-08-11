@@ -3,4 +3,13 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 16px;
   margin: 24px 0 0 0;
+
+  @media screen and (max-width: $wwa2 + px) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

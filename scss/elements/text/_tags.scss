@@ -5,6 +5,10 @@ h1,h2,h3,h4,h5,h6 {
 h1 {
   font-size: 48px;
   font-weight: bold;
+
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 36px;
+  }
 }
 
 h2 {
@@ -24,6 +28,15 @@ h2 {
     color: #f7f7f7;
     text-transform: uppercase;
     z-index: -1;
+
+    @media screen and (max-width: $wwa3 + px) {
+      font-size: 30px;
+      left: -12px;
+    }
+  }
+
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 20px;
   }
 }
 

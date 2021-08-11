@@ -7,10 +7,16 @@
 }
 
 .main-slide {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: $bg-light;
+
+  @media screen and (max-width: $wwa3 + px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 .main-slide__content {
@@ -30,6 +36,10 @@
 .main-slide-text {
   font-size: 18px;
   margin: 16px 0 0 0;
+
+  @media screen and (max-width: $wwa3 + px) {
+    font-size: 16px;
+  }
 }
 
 .main-slide__list {
@@ -62,6 +72,10 @@
 
 .main-slide-btn {
   margin: 36px 0 0 0;
+
+  @media screen and (max-width: $wwa3 + px) {
+    margin: 24px 0 0 0;
+  }
 }
 
 .main-slide-img {
@@ -73,6 +87,10 @@
     height: 100%;
     object-fit: contain;
     // transform: translate(20px,0);
+  }
+
+  @media screen and (max-width: $wwa3 + px) {
+    margin: 32px 0 0 0;
   }
 }
 
@@ -89,9 +107,26 @@
   align-items: flex-end;
   justify-content: space-between;
   margin: 46px 0 0 0;
+
+  @media screen and (max-width: 970px) {
+  align-items: flex-start;
+  flex-direction: column-reverse;
+  }
 }
 
 .main__advantages {
+  
+  @media screen and (max-width: 970px) {
+    margin: 12px 0 0 0;
+  }
+
+  @media screen and (max-width: $wwa3 + px) {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.main__advantages__list {
   display: grid;
   grid-template-columns: repeat(3, 220px);
   column-gap: 16px;
@@ -100,6 +135,10 @@
 .slider__pagination {
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 970px) {
+    margin: 0 0 0 auto;
+  }
 }
 
 .main__slider__pagination .swiper-pagination-bullet { 

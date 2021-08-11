@@ -8,6 +8,9 @@
   <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/ico"> Генератор для фавикон - https://realfavicongenerator.net/ -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dadata-style.css">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.6.0/dist/css/suggestions.min.css" rel="stylesheet" /> -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=009ddf45-2c26-4085-b0d9-34f7f52cee67" type="text/javascript"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -143,26 +146,28 @@
             </div>
           </div>
           <div class="main__elems">
-            <ul class="main__advantages">
-              <li class="advantages__card">
-                <div class="advantages__card__header">
-                  <h4 class="advantages__card-title">Всегда вовремя!</h4>
-                  <div class="advantages-img"><img src="img/advantages/advantages-time.svg" alt="Время"></div>
-                </div>
-              </li>
-              <li class="advantages__card">
-                <div class="advantages__card__header">
-                  <h4 class="advantages__card-title">Более 10 тыс. счастливых поездок!</h4>
-                  <div class="advantages-img"><img src="img/advantages/advantages-map.svg" alt="Путь"></div>
-                </div>
-              </li>
-              <li class="advantages__card">
-                <div class="advantages__card__header">
-                  <h4 class="advantages__card-title">Авто от 2012 года!</h4>
-                  <div class="advantages-img"><img src="img/advantages/advantages-taxi.svg" alt="Такси"></div>
-                </div>
-              </li>
-            </ul>
+            <div class="main__advantages">
+              <ul class="main__advantages__list">
+                <li class="advantages__card">
+                  <div class="advantages__card__header">
+                    <h4 class="advantages__card-title">Всегда вовремя!</h4>
+                    <div class="advantages-img"><img src="img/advantages/advantages-time.svg" alt="Время"></div>
+                  </div>
+                </li>
+                <li class="advantages__card">
+                  <div class="advantages__card__header">
+                    <h4 class="advantages__card-title">Более 10 тыс. счастливых поездок!</h4>
+                    <div class="advantages-img"><img src="img/advantages/advantages-map.svg" alt="Путь"></div>
+                  </div>
+                </li>
+                <li class="advantages__card">
+                  <div class="advantages__card__header">
+                    <h4 class="advantages__card-title">Авто от 2012 года!</h4>
+                    <div class="advantages-img"><img src="img/advantages/advantages-taxi.svg" alt="Такси"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <ul class="main__slider__pagination slider__pagination">
               <li class="slider__pagination-item _active">
                 <span>1</span>
@@ -175,11 +180,13 @@
         </div>
       </div>
     </main>
+    
     <section class="calc">
       <div class="container">
         <div class="calc__body">
           <div class="calc-map">
-
+            <div id="map-way"></div>
+            <div id="viewContainer"></div>
           </div>
           <div class="calc__content">
             <h2 class="h2-title calc-title">Расчет стоимости поездки</h2>
@@ -188,7 +195,7 @@
                 <h3 class="calc-subtitle">Адреса</h3>
                 <div class="calc__address__body">
                   <div class="input">
-                    <input class="_req" type="text" name="where-from">
+                    <input id="address_where_from" class="_req" type="text" name="where-from">
                     <label for="where-from">От куда*</label>
                   </div>
                   <button class="calc__address-swap">
@@ -198,28 +205,62 @@
                     </svg>
                   </button>
                   <div class="input">
-                    <input class="_req" type="text" name="where-from">
+                    <input id="address_where" class="_req" type="text" name="where-from">
                     <label for="where-from">Куда*</label>
                   </div>
-                  <button class="calc__address-add-address">
+                  <!-- <button class="calc__address-add-address">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.04167 3.13692C7.04167 2.67669 7.41476 2.30359 7.875 2.30359C8.33524 2.30359 8.70833 2.67669 8.70833 3.13692V6.47026L12.0417 6.47025C12.5019 6.47025 12.875 6.84335 12.875 7.30359C12.875 7.76383 12.5019 8.13692 12.0417 8.13692L8.70833 8.13692V11.4703C8.70833 11.9305 8.33524 12.3036 7.875 12.3036C7.41476 12.3036 7.04167 11.9305 7.04167 11.4703V8.13692H3.70833C3.2481 8.13692 2.875 7.76383 2.875 7.30359C2.875 6.84335 3.2481 6.47026 3.70833 6.47026H7.04167V3.13692Z" fill="#666666"/>
                     </svg>
-                  </button>
+                  </button> -->
+                </div>
+                <div class="checkbox__list">
+                  <div class="checkbox">
+                    <input name="checkbox" type="checkbox" data-show-checkbox="input-flight-number">
+                    <label for="checkbox" >
+                      <span class="chekcbox-text">Указать номер рейса</span>
+                      <span class="checkbox-icon" data-tooltip="Зная номер рейса, мы будем в курсе"><img src="img/calc/more.svg" alt="Подробнее"></span>
+                    </label>
+                  </div>
+                  <div class="checkbox" style="display: none;">
+                    <input name="checkbox" type="checkbox" data-show-checkbox="input-rental-hours">
+                    <label for="checkbox" >
+                      <span class="chekcbox-text">Аренда</span>
+                      <span class="checkbox-icon" data-tooltip="Укажите в часах, на сколько вы хотите взять авто в аренду"><img src="img/calc/more.svg" alt="Подробнее"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="calc__additionaly">
+                  <div class="input" data-show-input="input-flight-number">
+                    <input class="" type="text" name="flight-number">
+                    <label for="where-from">Номер рейса</label>
+                  </div>
+                  <div class="input" data-show-input="input-rental-hours">
+                    <input class="" type="number" name="rental-hours">
+                    <label for="where-from">Кол-во часов аренды</label>
+                  </div>
                 </div>
               </div>
               <div class="calc__date">
                 <h3 class="calc-subtitle">Дата и время:</h3>
                 <div class="calc__date__body">
-                  <div class="input">
-                    <input class="_req" type="text" name="where-from">
-                    <label for="where-from">Другое время</label>
+                  <div class="select">
+                    <div class="select__header">
+                      <span class="select-title"data-select-title="1">Как можно скорее</span>
+                      <span class="select-icon"><img src="img/calc/select_arrow.svg" alt="Изменить"></span>
+                    </div>
+                    <div class="select__body">
+                      <ul class="select__list">
+                        <li class="select-item _selected" data-select-item="1">Как можно скорее</li>
+                        <li class="select-item" data-select-item="2">Другое время</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div class="input">
+                  <div class="input" data-select-input="2">
                     <input class="_req" type="text" name="where-from">
                     <label for="where-from">Дата*</label>
                   </div>
-                  <div class="input">
+                  <div class="input" data-select-input="2">
                     <input class="_req" type="text" name="where-from">
                     <label for="where-from">Время*</label>
                   </div>
@@ -227,82 +268,160 @@
               </div>
               <div class="calc__services">
                 <h3 class="calc-subtitle">Доп. услуги:</h3>
+                <ul class="calc__services__select">
+                </ul>
                 <div class="calc__services__body">
-                  <div class="input">
-                    <input class="_req" type="text" name="where-from">
-                    <label for="where-from">Добавить</label>
+                  <div class="select__more">
+                    <div class="select__more__header" data-add-array="">
+                      <span class="select__more-title">Добавить</span>
+                      <span class="select__more-icon">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.875 3.30359L8.875 13.3036" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                          <path d="M3.875 8.30359L13.875 8.30359" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="select__more__body _show">
+                      <ul class="select__more__list">
+                        <li class="select__more-item" data-add-item="1" data-price-item="40">Вода</li>
+                        <li class="select__more-item" data-add-item="2" data-price-item="100">Табличка с именем</li>
+                        <li class="select__more-item" data-add-item="3" data-price-item="200">Детское кресло</li>
+                        <li class="select__more-item" data-add-item="4" data-price-item="200">Курящий салон</li>
+                        <li class="select__more-item" data-add-item="5" data-price-item="11">Доп. место для багажа</li>
+                        <li class="select__more-item" data-add-item="6" data-price-item="22">Доп. место для багажа</li>
+                        <li class="select__more-item" data-add-item="7" data-price-item="33">Доп. место для багажа</li>
+                        <li class="select__more-item" data-add-item="8" data-price-item="44">Доп. место для багажа</li>
+                        <li class="select__more-item" data-add-item="9" data-price-item="55">Доп. место для багажа</li>
+                        <li class="select__more-item" data-add-item="10" data-price-item="66">Доп. место для багажа</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="calc__class">
                 <h3 class="calc-subtitle">Класс авто:</h3>
                 <ul class="calc__class__body">
-                  <li class="calc__class-card">
+                  <li class="calc__class-card" data-class-auto="economy" data-price-auto="30">
                     <div class="calc__class-img"><img src="img/calc/class/economy-class.png" alt="Эконом класс"></div>
                     <div class="calc__class__content">
                       <h4 class="calc__class-title">Эконом</h4>
-                      <span class="calc__class-price">от <span>100</span> ₽</span>
+                      <span class="calc__class-price">от <span>69</span> ₽</span>
                       <div class="calc__class-select">
                         <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect y="0.303589" width="22" height="22" rx="11" fill="#89AB92"/>
                           <path d="M6.625 12.9907L9.58588 16L15.625 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                      <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Эконом">
-                        <img src="img/calc/more.svg" alt="Узнать подробнее">
-                      </a>
                     </div>
+                    <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Эконом">
+                      <img src="img/calc/more.svg" alt="Узнать подробнее">
+                    </a>
                   </li>
-                  <li class="calc__class-card _selected">
+                  <li class="calc__class-card _selected" data-class-auto="comfort" data-price-auto="35">
                     <div class="calc__class-img"><img src="img/calc/class/comfort-class.png" alt="Эконом класс"></div>
                     <div class="calc__class__content">
                       <h4 class="calc__class-title">Комфорт</h4>
-                      <span class="calc__class-price">от <span>200</span> ₽</span>
+                      <span class="calc__class-price">от <span>149</span> ₽</span>
                       <div class="calc__class-select">
                         <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect y="0.303589" width="22" height="22" rx="11" fill="#89AB92"/>
                           <path d="M6.625 12.9907L9.58588 16L15.625 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                      <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Комфорт">
-                        <img src="img/calc/more.svg" alt="Узнать подробнее">
-                      </a>
                     </div>
+                    <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Комфорт">
+                      <img src="img/calc/more.svg" alt="Узнать подробнее">
+                    </a>
                   </li>
-                  <li class="calc__class-card">
+                  <li class="calc__class-card" data-class-auto="business" data-price-auto="40">
                     <div class="calc__class-img"><img src="img/calc/class/business-class.png" alt="Комфорт класс"></div>
                     <div class="calc__class__content">
                       <h4 class="calc__class-title">Бизнес</h4>
-                      <span class="calc__class-price">от <span>300</span> ₽</span>
+                      <span class="calc__class-price">от <span>259</span> ₽</span>
                       <div class="calc__class-select">
                         <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect y="0.303589" width="22" height="22" rx="11" fill="#89AB92"/>
                           <path d="M6.625 12.9907L9.58588 16L15.625 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                      <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Бизнес">
-                        <img src="img/calc/more.svg" alt="Узнать подробнее">
-                      </a>
                     </div>
+                    <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о классе Бизнес">
+                      <img src="img/calc/more.svg" alt="Узнать подробнее">
+                    </a>
                   </li>
-                  <li class="calc__class-card">
+                  <li class="calc__class-card" data-class-auto="minivan" data-price-auto="40">
                     <div class="calc__class-img"><img src="img/calc/class/minivan-class.png" alt="Минивэн"></div>
                     <div class="calc__class__content">
                       <h4 class="calc__class-title">Минивэн</h4>
-                      <span class="calc__class-price">от <span>300</span> ₽</span>
+                      <span class="calc__class-price">от <span>259</span> ₽</span>
                       <div class="calc__class-select">
                         <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect y="0.303589" width="22" height="22" rx="11" fill="#89AB92"/>
                           <path d="M6.625 12.9907L9.58588 16L15.625 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                      <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о Минивэне">
-                        <img src="img/calc/more.svg" alt="Узнать подробнее">
-                      </a>
                     </div>
+                    <a href="#" class="calc__class-info" data-tooltip="Узнать подробнее о Минивэне">
+                      <img src="img/calc/more.svg" alt="Узнать подробнее">
+                    </a>
                   </li>
                 </ul>
               </div>
+            </div>
+            <div class="calc__person">
+              <div class="calc__person__contacts">
+                <h3 class="calc-subtitle">Ваши контакты:</h3>
+                <div class="calc__person__contacts__body">
+                  <div class="input">
+                    <input id="address_where_from" class="_req" type="text" name="where-from">
+                    <label for="where-from">Ваше имя*</label>
+                  </div>
+                  <div class="input">
+                    <input id="address_where" class="_req" type="text" name="where-from">
+                    <label for="where-from">Номер*</label>
+                  </div>
+                </div>
+                <div class="calc__person__contacts-textarea">
+                  <div class="input">
+                    <textarea class="_req" type="text" name="user-phone"></textarea>
+                    <label for="user-phone">Сообщение</label>
+                  </div>
+                </div>
+              </div>
+              <div class="calc__date">
+                <h3 class="calc-subtitle">Способ оплаты:</h3>
+                <div class="calc__date__body">
+                  <div class="select">
+                    <div class="select__header">
+                      <span class="select-title"data-select-title="1">Наличными водителю</span>
+                      <span class="select-icon"><img src="img/calc/select_arrow.svg" alt="Изменить"></span>
+                    </div>
+                    <div class="select__body">
+                      <ul class="select__list">
+                        <li class="select-item _selected" data-select-item="1">Наличными водителю</li>
+                        <li class="select-item" data-select-item="2">Перевод по карте</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="input" data-select-input="2">
+                    <input class="_req" type="text" name="where-from">
+                    <label for="where-from">Дата*</label>
+                  </div>
+                  <div class="input" data-select-input="2">
+                    <input class="_req" type="text" name="where-from">
+                    <label for="where-from">Время*</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="calc__footer">
+              <div class="calc__footer__info">
+                <span class="calc__footer-total">Общая цена: <span id="calc-total">-</span></span>
+                <span class="calc__footer-route">Расстояние: <span id="calc-route">-</span></span>
+                <span class="calc__footer-time">Время в пути: <span id="calc-time">-</span></span>
+              </div>
+              <button class="btn calc__footer-btn">Оформить заказ</button>
+              <button class="btn calc__footer-btn" style="display: none;">Заказать</button>
             </div>
           </div>
         </div>
@@ -624,6 +743,185 @@
         </div>
       </div>
     </section>
+    <section class="faq">
+      <div class="container">
+        <div class="faq__header">
+          <h2 class="faq-title" data-title-bg="faq">Остались вопросы?</h2>
+        </div>
+        <div class="faq__body">
+          <div class="faq__content">
+            <p class="faq-text">Не нашли на сайте ответ на свой вопрос? В этом разделе мы собрали одни из самых популярных вопросов наших клиентов.
+              <br><br>
+              Если среди этого списка нет вашего вопроса, напишите к нам в тех. поддержку. Мы с радостью поможем вам и проконсультируем по всем вопросам!</p>
+          </div>
+          <ul class="faq__acc__list">
+            <div class="faq__acc">
+              <div class="faq__acc__header _open">
+                <h3 class="faq__acc-title">Можно курить в машине?</h3>
+                <div class="faq__acc-arrow"><img src="img/faq/arrow.svg" alt="стрелка"></div>
+              </div>
+              <div class="faq__acc__body">
+                <p class="faq__acc-text">В доп. услугах вы можете выбрать услугу <a href="#">курящий салон</a>. Если вы заказали автомобиль без этой услуги, то курение в салоне запрещено!</p>
+              </div>
+            </div>
+            <div class="faq__acc">
+              <div class="faq__acc__header">
+                <h3 class="faq__acc-title">Можно курить в машине?</h3>
+                <div class="faq__acc-arrow"><img src="img/faq/arrow.svg" alt="стрелка"></div>
+              </div>
+              <div class="faq__acc__body">
+                <p class="faq__acc-text">В доп. услугах вы можете выбрать услугу <a href="#">курящий салон</a>. Если вы заказали автомобиль без этой услуги, то курение в салоне запрещено!</p>
+              </div>
+            </div>
+            <div class="faq__acc">
+              <div class="faq__acc__header">
+                <h3 class="faq__acc-title">Можно курить в машине?</h3>
+                <div class="faq__acc-arrow"><img src="img/faq/arrow.svg" alt="стрелка"></div>
+              </div>
+              <div class="faq__acc__body">
+                <p class="faq__acc-text">В доп. услугах вы можете выбрать услугу <a href="#">курящий салон</a>. Если вы заказали автомобиль без этой услуги, то курение в салоне запрещено!</p>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="support">
+      <div class="container">
+        <h2 class="support-title" data-title-bg="support">Тех. поддержка</h2>
+        <div class="support__body">
+          <div class="support__content">
+            <p class="support-text">Мы стараемся отвечать как можно быстрее, но, из-за большого количества туристов, время ответа может составлять более 2 часов. Приносим извинения за доставленные неудобства. <br><br>
+              Если ваш вопрос требует срочного ответа, вы всегда можете позвонить по номеру <a href="#">+7 (880) 123-45-67</a></p>
+          </div>
+          <form action="#" method="POST" class="support__form">
+            <div class="support__inputs">
+              <div class="input">
+                <input class="_req" type="text" name="user-name">
+                <label for="user-name">Имя*</label>
+              </div>
+              <div class="input">
+                <input class="_req" type="text" name="user-phone">
+                <label for="user-phone">Номер*</label>
+              </div>
+            </div>
+            <div class="support-textarea">
+              <div class="input">
+                <textarea class="_req" type="text" name="user-phone"></textarea>
+                <label for="user-phone">Номер*</label>
+              </div>
+            </div>
+            <button class="btn support-btn">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer__up">
+        <div class="container">
+          <div class="footer__up__body">
+            <div class="footer__up__menu">
+              <nav class="footer__nav">
+                <h2 class="footer__nav-title">Регионы обслуживания</h2>
+                <ul class="footer__nav__list">
+                  <li><a href="#">в Алупке</a></li>
+                  <li><a href="#">в Алуште</a></li>
+                  <li><a href="#">в Армянске</a></li>
+                  <li><a href="#">в Бахчисарае (Бахчисарайский район)</a></li>
+                  <li><a href="#">в Белогорске (Белогорский район)</a></li>
+                  <li><a href="#">в Джанкое</a></li>
+                  <li><a href="#">в Евпатории</a></li>
+                  <li><a href="#">в Керчи</a></li>
+                  <li><a href="#">в Красноперекопске</a></li>
+                  <li><a href="#">в Саки</a></li>
+                  <li><a href="#">в Симферополе</a></li>
+                  <li><a href="#">в Старом Крыме (Кировский район)</a></li>
+                  <li><a href="#">в Судаке</a></li>
+                  <li><a href="#">в Феодосии</a></li>
+                  <li><a href="#">в Щёлкино (Ленинский район)</a></li>
+                  <li><a href="#">в Ялте</a></li>
+                </ul>
+              </nav>
+              <nav class="footer__nav">
+                <h2 class="footer__nav-title">Услуги</h2>
+                <ul class="footer__nav__list">
+                  <li><a href="#">Такси Автоняня</a></li>
+                  <li><a href="#">Перегон автомобиля</a></li>
+                  <li><a href="#">Междугороднее такси</a></li>
+                  <li><a href="#">Такси с детским креслом</a></li>
+                  <li><a href="#">Курьерские услуги</a></li>
+                  <li><a href="#">Такси в аэропорт</a></li>
+                  <li><a href="#">Такси на ж/д вокзал</a></li>
+                  <li><a href="#">Такси из роддома</a></li>
+                  <li><a href="#">Прикурить автомобиль</a></li>
+                </ul>
+              </nav>
+              <nav class="footer__nav">
+                <h2 class="footer__nav-title">Водителям</h2>
+                <ul class="footer__nav__list">
+                  <li><a href="#">Хотите с нами работать?</a></li>
+                  <li><a href="#">Правила работы. Обязанности</a></li>
+                  <li><a href="#">Приложения для водителей</a></li>
+                  <li><a href="#">Видеоинструктаж</a></li>
+                  <li><a href="#">Акции для водителей</a></li>
+                  <li><a href="#">Установка программы</a></li>
+                  <li><a href="#">Работа с приложением для водителей</a></li>
+                  <li><a href="#">Подписки на заказы. Оптимальный тариф</a></li>
+                  <li><a href="#">Инструкция по замене колес</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="footer__up__contacts">
+              <a href="#" class="footer__up-logo"><img src="img/icons/logo.svg" alt="Логотип"></a>
+              <span class="footer__up-work-time">Время работы: 24/7</span>
+              <ul class="footer__up__messenger">
+                <li><a href="#">
+                  <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 16.5C0 7.66344 7.16344 0.5 16 0.5C24.8366 0.5 32 7.66344 32 16.5C32 25.3366 24.8366 32.5 16 32.5C7.16344 32.5 0 25.3366 0 16.5Z" fill="#FAFAFA"/>
+                    <path d="M16.0001 13.8963C14.5665 13.8963 13.3965 15.0663 13.3965 16.4999C13.3965 17.9334 14.5665 19.1034 16.0001 19.1034C17.4337 19.1034 18.6036 17.9334 18.6036 16.4999C18.6036 15.0663 17.4337 13.8963 16.0001 13.8963ZM23.8086 16.4999C23.8086 15.4217 23.8184 14.3534 23.7579 13.2772C23.6973 12.0272 23.4122 10.9178 22.4981 10.0038C21.5821 9.08774 20.4747 8.80454 19.2247 8.74399C18.1465 8.68344 17.0782 8.69321 16.002 8.69321C14.9239 8.69321 13.8555 8.68344 12.7794 8.74399C11.5294 8.80454 10.42 9.08969 9.50592 10.0038C8.58991 10.9198 8.3067 12.0272 8.24616 13.2772C8.18561 14.3553 8.19537 15.4237 8.19537 16.4999C8.19537 17.576 8.18561 18.6463 8.24616 19.7225C8.3067 20.9725 8.59186 22.0819 9.50592 22.9959C10.4219 23.912 11.5294 24.1952 12.7794 24.2557C13.8575 24.3163 14.9258 24.3065 16.002 24.3065C17.0801 24.3065 18.1485 24.3163 19.2247 24.2557C20.4747 24.1952 21.584 23.91 22.4981 22.9959C23.4141 22.0799 23.6973 20.9725 23.7579 19.7225C23.8204 18.6463 23.8086 17.578 23.8086 16.4999ZM16.0001 20.5057C13.7833 20.5057 11.9942 18.7167 11.9942 16.4999C11.9942 14.2831 13.7833 12.494 16.0001 12.494C18.2169 12.494 20.0059 14.2831 20.0059 16.4999C20.0059 18.7167 18.2169 20.5057 16.0001 20.5057ZM20.17 13.2655C19.6524 13.2655 19.2344 12.8475 19.2344 12.3299C19.2344 11.8124 19.6524 11.3944 20.17 11.3944C20.6876 11.3944 21.1055 11.8124 21.1055 12.3299C21.1057 12.4528 21.0816 12.5746 21.0346 12.6881C20.9877 12.8017 20.9188 12.9049 20.8319 12.9918C20.7449 13.0787 20.6418 13.1476 20.5282 13.1946C20.4146 13.2415 20.2929 13.2656 20.17 13.2655Z" fill="black" fill-opacity="0.5"/>
+                  </svg>
+                </a></li>
+                <li><a href="#">
+                  <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 16.5C0 7.66344 7.16344 0.5 16 0.5C24.8366 0.5 32 7.66344 32 16.5C32 25.3366 24.8366 32.5 16 32.5C7.16344 32.5 0 25.3366 0 16.5Z" fill="#FAFAFA"/>
+                    <path d="M23.2214 9.59735L8.44635 15.2948C7.43802 15.6998 7.44385 16.2623 8.26135 16.5132L12.0547 17.6965L20.8314 12.159C21.2464 11.9065 21.6255 12.0423 21.3138 12.319L14.203 18.7365H14.2013L14.203 18.7373L13.9413 22.6473C14.3247 22.6473 14.4938 22.4715 14.7088 22.264L16.5513 20.4723L20.3838 23.3032C21.0905 23.6923 21.598 23.4923 21.7738 22.649L24.2897 10.7923C24.5472 9.75985 23.8955 9.29235 23.2214 9.59735Z" fill="black" fill-opacity="0.5"/>
+                  </svg>
+                </a></li>
+                <li><a href="#">
+                  <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 16.5C0 7.66344 7.16344 0.5 16 0.5C24.8366 0.5 32 7.66344 32 16.5C32 25.3366 24.8366 32.5 16 32.5C7.16344 32.5 0 25.3366 0 16.5Z" fill="#FAFAFA"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M25.5417 11.4565C25.68 11.0015 25.5417 10.6665 24.8792 10.6665H22.6917C22.135 10.6665 21.8783 10.9557 21.7392 11.2748C21.7392 11.2748 20.6267 13.9382 19.0508 15.6682C18.5408 16.1698 18.3092 16.329 18.0308 16.329C17.8917 16.329 17.6825 16.1698 17.6825 15.714V11.4565C17.6825 10.9098 17.5292 10.6665 17.0658 10.6665H13.6258C13.2783 10.6665 13.0692 10.9198 13.0692 11.1607C13.0692 11.6782 13.8575 11.7982 13.9383 13.2548V16.4198C13.9383 17.114 13.8108 17.2398 13.5325 17.2398C12.7908 17.2398 10.9867 14.564 9.91583 11.5023C9.70833 10.9065 9.49833 10.6665 8.93917 10.6665H6.75C6.125 10.6665 6 10.9557 6 11.2748C6 11.8432 6.74167 14.6665 9.45417 18.4007C11.2625 20.9507 13.8083 22.3332 16.1275 22.3332C17.5183 22.3332 17.69 22.0265 17.69 21.4973V19.5698C17.69 18.9557 17.8217 18.8332 18.2625 18.8332C18.5875 18.8332 19.1433 18.9932 20.4417 20.2223C21.925 21.6798 22.1692 22.3332 23.0042 22.3332H25.1917C25.8167 22.3332 26.13 22.0265 25.95 21.4198C25.7517 20.8165 25.0433 19.9407 24.1042 18.9015C23.5942 18.3098 22.8292 17.6723 22.5967 17.3532C22.2725 16.944 22.365 16.7615 22.5967 16.3973C22.5967 16.3973 25.2633 12.709 25.5408 11.4565H25.5417Z" fill="black" fill-opacity="0.5"/>
+                  </svg>
+                </a></li>
+              </ul>
+              <a href="tel:+7 (880) 123-45-67" class="footer__up-phone">+7 (880) 123-45-67</a>
+              <a href="mailto:transfer@gmail.com" class="footer__up-email">transfer@gmail.com</a>
+              <a href="#" class="footer__up__support">
+                <span class="footer__up__support-text">Тех.поддержка</span>
+                <span class="footer__up__support-icon">
+                  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 13H4C4.13542 13 4.2526 12.9505 4.35156 12.8516C4.45052 12.7526 4.5 12.6354 4.5 12.5V7.5C4.5 7.36458 4.45052 7.2474 4.35156 7.14844C4.2526 7.04948 4.13542 7 4 7H3.5C3.5 5.45833 3.92969 4.23958 4.78906 3.34375C5.64844 2.44792 6.88542 2 8.5 2C10.1146 2 11.3516 2.44792 12.2109 3.34375C13.0703 4.23958 13.5 5.45833 13.5 7H13C12.8646 7 12.7474 7.04948 12.6484 7.14844C12.5495 7.2474 12.5 7.36458 12.5 7.5V12.5C12.5 12.6354 12.5495 12.7526 12.6484 12.8516C12.7474 12.9505 12.8646 13 13 13H13.5C13.5 13.5521 13.3047 14.0234 12.9141 14.4141C12.5234 14.8047 12.0521 15 11.5 15H10.5C10.5 14.7188 10.4036 14.4818 10.2109 14.2891C10.0182 14.0964 9.78125 14 9.5 14H8.5C8.21875 14 7.98177 14.0964 7.78906 14.2891C7.59635 14.4818 7.5 14.7161 7.5 14.9922C7.5 15.2682 7.59635 15.5052 7.78906 15.7031C7.98177 15.901 8.21875 16 8.5 16H11.5C12.3333 16 13.0417 15.7083 13.625 15.125C14.2083 14.5417 14.5 13.8333 14.5 13C15.0521 13 15.5234 12.7083 15.9141 12.125C16.3047 11.5417 16.5 10.8333 16.5 10C16.5 9.45833 16.4089 8.95833 16.2266 8.5C16.0443 8.04167 15.8021 7.68229 15.5 7.42188V7C15.5 6.05208 15.3151 5.14583 14.9453 4.28125C14.5755 3.41667 14.0781 2.67188 13.4531 2.04688C12.8281 1.42188 12.0833 0.924479 11.2188 0.554688C10.3542 0.184896 9.44792 0 8.5 0C7.55208 0 6.64583 0.184896 5.78125 0.554688C4.91667 0.924479 4.17188 1.42188 3.54688 2.04688C2.92188 2.67188 2.42448 3.41667 2.05469 4.28125C1.6849 5.14583 1.5 6.05208 1.5 7V7.42188C1.19792 7.68229 0.955729 8.04167 0.773438 8.5C0.591146 8.95833 0.5 9.45833 0.5 10C0.5 10.8333 0.695312 11.5417 1.08594 12.125C1.47656 12.7083 1.94792 13 2.5 13Z" fill="#F3CC3F"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__down">
+        <div class="container">
+          <div class="footer__down__body">
+            <span class="footer__down-copyright">© 2020-<span>2021</span></span>
+            <ul class="footer__down__docs">
+              <li><a href="#">Публичная оферта</a></li>
+              <li><a href="#">Политика конфеденциальности</a></li>
+              <li><a href="#">Реквизиты</a></li>
+            </ul>
+            <a href="https://ugryumov.com/contacts" class="footer__down-dev">dev AU</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
   <div class="menu">
     <div class="menu__sidebar">
@@ -675,7 +973,7 @@
             <path d="M19.023 16.977C18.5546 16.5284 18.0988 16.0669 17.656 15.593C17.284 15.215 17.06 14.94 17.06 14.94L14.26 13.603C15.381 12.3316 15.9997 10.695 16 9C16 5.141 12.86 2 9 2C5.14 2 2 5.141 2 9C2 12.859 5.14 16 9 16C10.763 16 12.37 15.34 13.603 14.261L14.94 17.061C14.94 17.061 15.215 17.285 15.593 17.657C15.98 18.02 16.489 18.511 16.977 19.024L18.335 20.416L18.939 21.062L21.06 18.941L20.414 18.337C20.035 17.965 19.529 17.471 19.023 16.977ZM9 14C6.243 14 4 11.757 4 9C4 6.243 6.243 4 9 4C11.757 4 14 6.243 14 9C14 11.757 11.757 14 9 14Z" fill="#666666"/>
           </svg>
         </button>
-        <input class="search__form-input" type="text" name="s">
+        <input class="search__form-input" type="text" name="s" placeholder="Поиск...">
         <button class="close search-close">
           <div class="close__body">
             <span></span>
@@ -684,6 +982,8 @@
       </form>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.6.0/dist/js/jquery.suggestions.min.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>

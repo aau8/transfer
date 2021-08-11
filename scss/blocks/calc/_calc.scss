@@ -1,1 +1,82 @@
+.calc__body {
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: $wwa2 + px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.calc-map {
+  max-width: 567px;
+  width: 100%;
+  height: 552px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: $wwa2 + px) {
+    max-width: none;
+    margin: 24px 0 0 0;
+  }
+}
+
+#map-way {
+  width: 100%;
+  height: 100%;
+  // filter: grayscale(1)
+
+}
+
+.calc__content {
+  max-width: 516px;
+  width: 100%;
+  margin: 0 0 0 24px;
+
+  @media screen and (max-width: $wwa2 + px) {
+    max-width: none;
+    margin: 0;
+  }
+}
+
 @import '_computing';
+@import '_person';
+
+.calc__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0 0 0;
+  margin: 24px 0 0 0;
+  border-top: 1px solid $outline;
+}
+
+.calc__footer__info {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.calc__footer-total,
+.calc__footer-route,
+.calc__footer-time {
+  font-size: 18px;
+  font-weight: 600;
+  color: $second;
+
+  & span {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700; 
+    color: $main;
+  }
+}
+
+
+.calc__footer-route,
+.calc__footer-time {
+  font-size: 16px;
+}
+
+.calc__footer-btn {
+
+}

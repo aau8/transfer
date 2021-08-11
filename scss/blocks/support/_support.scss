@@ -1,0 +1,31 @@
+.support__body {
+  display: flex;
+
+  @media screen and (max-width: $wwa2 + px) {
+    flex-direction: column;
+  }
+}
+
+.support__content {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 24px 0 0;
+
+  @media screen and (max-width: $wwa2 + px) {
+    max-width: none;
+  }
+}
+
+.support-text {
+
+  & a {
+    font-weight: 600;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+@import '_form';

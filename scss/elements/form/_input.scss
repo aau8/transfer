@@ -1,5 +1,5 @@
 .input {
-  // width: 200px;
+  // width: 200px; 
   height: 36px;
   background: #fff;
   position: relative;
@@ -18,7 +18,8 @@
     transition: .2s;
   }
 
-  & input {
+  & input,
+  & textarea {
     outline: none;
     position: absolute;
     top: 0;

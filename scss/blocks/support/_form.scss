@@ -1,0 +1,45 @@
+.support__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (max-width: $wwa2 + px) {
+    margin: 24px 0 0 0;
+  }
+}
+
+.support__inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 12px;
+
+  @media screen and (max-width: 400px) {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+}
+
+.support-textarea {
+  margin: 14px 0 0 0;
+
+  & .input {
+    height: 108px;
+
+    & label {
+      top: 8px;
+      transform: translate(0);
+    }
+
+    & textarea {
+      padding: 8px 33px 8px 10px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    margin: 8px 0 0 0;
+  }
+}
+
+.support-btn {
+  margin: 24px 0 0 auto;
+}

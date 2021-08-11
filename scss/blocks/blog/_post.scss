@@ -1,5 +1,5 @@
 .post {
-  width: 375px;
+  // width: 375px;
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -116,10 +116,22 @@
   font-size: 20px;
   font-weight: 600;
   margin: 8px 0 0 0;
+
+  @media screen and (max-width: $wwa + px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+  }
 }
 
 .post-text {
   margin: 4px 0 0 0;
+
+  @media screen and (max-width: $wwa + px) {
+    font-size: 14px;
+  }
 }
 
 .post-btn {
